@@ -37,7 +37,6 @@ header {
   align-items: center;
 }
 
-/* تكبير اللوجو ليكون واضحًا ومناسبًا للهيدر */
 .logo-img {
   height: 75px;
   width: auto;
@@ -75,7 +74,6 @@ header {
   color: var(--gold-color);
 }
 
-/* زر تغيير اللغة */
 .lang-btn {
   background: transparent;
   border: 1px solid var(--gold-color);
@@ -92,7 +90,7 @@ header {
   color: var(--bg-color);
 }
 
-/* ----- 2. قسم الفيديو (تنسيق الإطار وبدون حواف سوداء) ----- */
+/* ----- 2. قسم الفيديو ----- */
 .video-hero-container {
   display: flex;
   justify-content: center;
@@ -115,10 +113,9 @@ header {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover; /* يملأ الإطار بالكامل بدون مساحات سوداء */
+  object-fit: cover;
 }
 
-/* النصوص تحت الفيديو */
 .hero-text {
   text-align: center;
   margin: 25px 0 35px;
@@ -183,6 +180,10 @@ header {
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
+  direction: ltr !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-btn:hover {
@@ -192,6 +193,16 @@ header {
 
 .prev-btn { left: 15px; }
 .next-btn { right: 15px; }
+
+html[dir="rtl"] .prev-btn {
+  left: 15px;
+  right: auto;
+}
+
+html[dir="rtl"] .next-btn {
+  right: 15px;
+  left: auto;
+}
 
 .dots-container {
   display: flex;
@@ -212,7 +223,7 @@ header {
   background-color: var(--gold-color);
 }
 
-/* ----- 4. باقي الصفحات (About / Contact) ----- */
+/* ----- 4. الصفحات الأخرى ----- */
 .page-section {
   display: none;
   padding: 20px 8% 50px;
@@ -298,4 +309,95 @@ footer {
   color: #555;
   font-size: 0.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================================= */
+/* ----- Responsive Styles for Mobile & Tablets (تجاوب الموبايل) ----- */
+/* ========================================================= */
+
+@media (max-width: 768px) {
+  /* Header & Navigation */
+  header {
+    flex-direction: column;
+    padding: 12px 15px;
+    gap: 12px;
+  }
+
+  .logo-img {
+    height: 55px;
+  }
+
+  .navbar {
+    width: 100%;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .navbar ul {
+    gap: 15px;
+  }
+
+  .navbar a {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+
+  .lang-btn {
+    padding: 4px 12px;
+    font-size: 0.8rem;
+  }
+
+  /* Video & Texts */
+  .video-hero-container {
+    padding: 15px 10px 5px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+  }
+
+  .hero-text p {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  /* Slider */
+  .slider-wrapper {
+    height: 280px;
+  }
+
+  .nav-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .prev-btn { left: 8px; }
+  .next-btn { right: 8px; }
+
+  html[dir="rtl"] .prev-btn {
+    left: 8px;
+    right: auto;
+  }
+
+  html[dir="rtl"] .next-btn {
+    right: 8px;
+    left: auto;
+  }
+
+  /* Sections & Forms */
+  .page-section {
+    padding: 20px 5% 40px;
+  }
+
+  .section-title h2 {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+  }
+
+  .about-content {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
 }
