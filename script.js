@@ -1,6 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ----- 1. Navigation & Page Switching ----- */
+  /* ----- 1. Hero Video Control (Play Once & Pause on Last Frame) ----- */
+  const heroVideo = document.getElementById('hero-video');
+
+  if (heroVideo) {
+    // تأكيد كتم الصوت لضمان التشغيل التلقائي عبر المتصفحات
+    heroVideo.muted = true;
+
+    // محاولة تشغيل الفيديو
+    const playPromise = heroVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // إذا منع المتصفح التشغيل التلقائي، يتم التشغيل مع أول تفاعل للمستخدم
+        document.addEventListener('click', () => {
+          heroVideo.play();
+        }, { once: true });
+      });
+    }
+
+    // إيقاف الفيديو تماماً وثباته على آخر ثانية عند الانتهاء
+    heroVideo.addEventListener('ended', () => {
+      heroVideo.pause();
+    });
+  }
+
+  /* ----- 2. Navigation & Page Switching ----- */
   const navLinks = document.querySelectorAll('.nav-link');
   const pageSections = document.querySelectorAll('.page-section');
   const logoLink = document.getElementById('logo-link');
@@ -42,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ----- 2. Language Toggle (Bilingual EN/AR) ----- */
+  /* ----- 3. Language Toggle (Bilingual EN/AR) ----- */
   const langToggleBtn = document.getElementById('lang-toggle');
 
   if (langToggleBtn) {
@@ -51,30 +75,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const isEnglish = currentDir === 'ltr';
 
       if (isEnglish) {
-        // التحويل للعربية
         document.documentElement.setAttribute('dir', 'rtl');
         document.documentElement.setAttribute('lang', 'ar');
         langToggleBtn.textContent = 'English';
       } else {
-        // التحويل للإنجليزية
         document.documentElement.setAttribute('dir', 'ltr');
         document.documentElement.setAttribute('lang', 'en');
         langToggleBtn.textContent = 'عربي';
       }
 
-      // تحديث النصوص في الصفحة
       document.querySelectorAll('[data-en][data-ar]').forEach(element => {
         element.textContent = isEnglish ? element.getAttribute('data-ar') : element.getAttribute('data-en');
       });
 
-      // تحديث الـ Placeholders للنماذج
       document.querySelectorAll('[data-placeholder-en][data-placeholder-ar]').forEach(input => {
         input.placeholder = isEnglish ? input.getAttribute('data-placeholder-ar') : input.getAttribute('data-placeholder-en');
       });
     });
   }
 
-  /* ----- 3. Gallery Dynamic Slider ----- */
+  /* ----- 4. Gallery Dynamic Slider ----- */
   const slides = document.querySelectorAll('.slide');
   const dots = document.querySelectorAll('.dot');
   const prevBtn = document.getElementById('prevBtn');
@@ -145,12 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // تشغيل السلايدر التلقائي عند بدء الصفحة
   if (slides.length > 0) {
     startAutoSlide();
   }
 
-  /* ----- 4. Contact Form Handler ----- */
+  /* ----- 5. Contact Form Handler ----- */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
