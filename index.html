@@ -5,100 +5,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ARROW | Furniture & Woodworks</title>
   
+  <!-- Montserrat Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navigation Bar -->
+  <!-- ----- Header & Navigation ----- -->
   <header>
     <div class="logo-container">
-      <!-- استخدام صورة اللوجو png فقط وإلغاء النص المكتوب فوق -->
-      <a href="#home">
-        <img src="img/logo.png" alt="ARROW Logo" class="logo-img" id="logoImg">
+      <a href="#" id="logo-link">
+        <img src="img/logo.png" alt="ARROW Logo" class="logo-img">
       </a>
     </div>
 
     <nav class="navbar">
       <ul>
-        <li><a href="#home" class="nav-link active" data-en="Home" data-ar="الرئيسية">Home</a></li>
-        <li><a href="#about" class="nav-link" data-en="About Us" data-ar="من نحن">About Us</a></li>
-        <li><a href="#contact" class="nav-link" data-en="Contact Us" data-ar="تواصل معنا">Contact Us</a></li>
+        <li><a href="#" class="nav-link active" data-section="home" data-en="Home" data-ar="الرئيسية">Home</a></li>
+        <li><a href="#" class="nav-link" data-section="about" data-en="About Us" data-ar="من نحن">About Us</a></li>
+        <li><a href="#" class="nav-link" data-section="contact" data-en="Contact" data-ar="تواصل معنا">Contact</a></li>
       </ul>
-      
-      <button id="langToggleBtn" class="lang-btn">عربي</button>
+      <button id="lang-toggle" class="lang-btn">عربي</button>
     </nav>
   </header>
 
+  <!-- ----- Main Content Area ----- -->
   <main>
-    <!-- Home Section -->
+    
+    <!-- 1. Home Section -->
     <section id="home" class="page-section active-section">
-      
-      <!-- Video Frame Container -->
+      <!-- Video Container -->
       <div class="video-hero-container">
         <div class="video-frame">
-          <video id="hero-video" autoplay muted playsinline controls preload="metadata">
+          <video id="hero-video" autoplay loop muted playsinline disablePictureInPicture controlslist="nodownload nofullscreen noremoteplayback">
             <source src="img/logo-video.mp4" type="video/mp4">
-            Your browser does not support video play.
+            Your browser does not support the video tag.
           </video>
         </div>
       </div>
 
       <div class="hero-text">
-        <h1 id="heroTitle">SPACES WITH PURPOSE</h1>
-        <p id="heroSubtitle">Crafting & Exporting Luxury Wooden Furniture</p>
+        <h1 data-en="ELEGANCE IN EVERY DETAIL" data-ar="الفخامة في كل تفصيلة">ELEGANCE IN EVERY DETAIL</h1>
+        <p data-en="LUXURY WOODWORKS & CUSTOM FURNITURE" data-ar="أرقى الأعمال الخشبية والأثاث المخصص">LUXURY WOODWORKS & CUSTOM FURNITURE</p>
       </div>
 
-      <!-- Image Gallery Slider -->
+      <!-- Gallery Slider -->
       <div class="gallery-container">
-        <button class="nav-btn prev-btn" id="prevBtn">&#10094;</button>
-        <button class="nav-btn next-btn" id="nextBtn">&#10095;</button>
-
         <div class="slider-wrapper">
           <div class="slide active" style="background-image: url('img/photo1.jpg');"></div>
           <div class="slide" style="background-image: url('img/photo2.jpg');"></div>
           <div class="slide" style="background-image: url('img/photo3.jpg');"></div>
+
+          <button class="nav-btn prev-btn" id="prevBtn">&#10094;</button>
+          <button class="nav-btn next-btn" id="nextBtn">&#10095;</button>
         </div>
 
-        <div class="dots-container" id="dotsContainer"></div>
+        <div class="dots-container">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+        </div>
       </div>
     </section>
 
-    <!-- About Section -->
+    <!-- 2. About Us Section -->
     <section id="about" class="page-section">
       <div class="section-title">
-        <h2 id="aboutTitle">ABOUT US</h2>
+        <h2 data-en="ABOUT ARROW" data-ar="عن أرو">ABOUT ARROW</h2>
         <span class="gold-line"></span>
       </div>
       <div class="about-content">
-        <p id="aboutDesc">At <strong>ARROW Woodworks</strong>, we blend heritage with modern aesthetics in luxury wooden furniture manufacturing. We bring innovative concepts into modern spaces with exquisite craftsmanship and supreme quality.</p>
+        <p data-en="At ARROW, we craft bespoke luxury woodworks and high-end architectural furniture tailored for sophisticated spaces. Combining timeless craftsmanship with contemporary minimalist design, every piece reflects elegance, precision, and durability."
+           data-ar="في أرو (ARROW)، نقوم بصناعة أرقى الأعمال الخشبية والأثاث المخصص المصمم خصيصاً للمساحات الفاخرة. نمزج بين الحرفية الكلاسيكية والتصميم المودرن البسيط، لتعكس كل قطعة معنى الفخامة، الدقة، والأناقة المستمرة.">
+          At ARROW, we craft bespoke luxury woodworks and high-end architectural furniture tailored for sophisticated spaces. Combining timeless craftsmanship with contemporary minimalist design, every piece reflects elegance, precision, and durability.
+        </p>
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- 3. Contact Section -->
     <section id="contact" class="page-section">
       <div class="section-title">
-        <h2 id="contactTitle">CONTACT US</h2>
+        <h2 data-en="CONTACT US" data-ar="تواصل معنا">CONTACT US</h2>
         <span class="gold-line"></span>
       </div>
       <div class="contact-container">
-        <form class="contact-form" onsubmit="event.preventDefault();">
-          <input type="text" id="inputName" placeholder="Full Name" required>
-          <input type="email" id="inputEmail" placeholder="Email Address" required>
-          <textarea id="inputMsg" rows="5" placeholder="Your Message..." required></textarea>
-          <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+        <form class="contact-form" id="contactForm">
+          <input type="text" placeholder="Your Name" data-placeholder-en="Your Name" data-placeholder-ar="الاسم" required>
+          <input type="email" placeholder="Your Email" data-placeholder-en="Your Email" data-placeholder-ar="البريد الإلكتروني" required>
+          <textarea rows="5" placeholder="Your Message" data-placeholder-en="Your Message" data-placeholder-ar="رسالتك" required></textarea>
+          <button type="submit" class="submit-btn" data-en="SEND MESSAGE" data-ar="إرسال الرسالة">SEND MESSAGE</button>
         </form>
       </div>
     </section>
+
   </main>
 
+  <!-- ----- Footer ----- -->
   <footer>
-    <p>ARROW WOODWORKS &copy; 2026 - ALL RIGHTS RESERVED</p>
+    <p>&copy; 2026 ARROW Woodworks. All rights reserved.</p>
   </footer>
 
+  <!-- JavaScript File -->
   <script src="script.js"></script>
 </body>
 </html>
