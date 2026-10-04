@@ -1,35 +1,40 @@
-/* ----- الثيم والألوان الأساسية ----- */
+/* ----- Global Variables & Reset ----- */
 :root {
-  --bg-color: #0E0E0E;
-  --gold-color: #B99872;
-  --text-muted: #C9C6BE;
-  --card-bg: #161616;
+  --bg-color: #0d0d0d;
+  --card-bg: #141414;
+  --text-color: #e6e6e6;
+  --gold-color: #b99872;
+  --gold-hover: #d4b28c;
+  --font-family: 'Montserrat', sans-serif;
 }
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
 }
 
 body {
   background-color: var(--bg-color);
-  color: #ffffff;
-  overflow-x: hidden;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ----- 1. Header & NavBar ----- */
+/* ----- Header & Navigation ----- */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 5%;
-  background-color: #0A0A0A;
+  padding: 20px 40px;
+  background-color: rgba(13, 13, 13, 0.95);
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(185, 152, 114, 0.25);
+  border-bottom: 1px solid rgba(185, 152, 114, 0.2);
 }
 
 .logo-container {
@@ -38,15 +43,10 @@ header {
 }
 
 .logo-img {
-  height: 75px;
+  height: 45px;
   width: auto;
   display: block;
   object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.logo-img:hover {
-  transform: scale(1.05);
 }
 
 .navbar {
@@ -58,19 +58,20 @@ header {
 .navbar ul {
   display: flex;
   list-style: none;
-  gap: 30px;
+  gap: 25px;
 }
 
-.navbar a {
-  color: #ffffff;
+.nav-link {
+  color: var(--text-color);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
   letter-spacing: 1px;
   transition: color 0.3s ease;
+  font-weight: 500;
 }
 
-.navbar a:hover,
-.navbar a.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--gold-color);
 }
 
@@ -79,76 +80,128 @@ header {
   border: 1px solid var(--gold-color);
   color: var(--gold-color);
   padding: 6px 16px;
-  border-radius: 4px;
+  font-family: var(--font-family);
+  font-size: 0.85rem;
   cursor: pointer;
-  font-weight: 600;
+  border-radius: 4px;
   transition: all 0.3s ease;
 }
 
 .lang-btn:hover {
-  background: var(--gold-color);
+  background-color: var(--gold-color);
   color: var(--bg-color);
 }
 
-/* ----- 2. قسم الفيديو ----- */
+/* ----- Main Content Areas ----- */
+main {
+  flex: 1;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-section {
+  display: none;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.page-section.active-section {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ----- Section Titles & Accents ----- */
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title h2 {
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: 2px;
+  font-size: 1.8rem;
+}
+
+.gold-line {
+  display: block;
+  width: 60px;
+  height: 2px;
+  background-color: var(--gold-color);
+  margin: 10px auto 0;
+}
+
+/* ----- Hero Video Section ----- */
 .video-hero-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 25px 20px 10px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 30px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(185, 152, 114, 0.3);
 }
 
 .video-frame {
+  position: relative;
   width: 100%;
-  max-width: 850px;
-  aspect-ratio: 16 / 9;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(185, 152, 114, 0.3);
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
   background-color: #000;
 }
 
 #hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hide native media controls */
+#hero-video::-webkit-media-controls,
+#hero-video::-webkit-media-controls-enclosure {
+  display: none !important;
 }
 
 .hero-text {
   text-align: center;
-  margin: 25px 0 35px;
+  margin-bottom: 50px;
 }
 
 .hero-text h1 {
-  font-size: 2rem;
-  font-weight: 300;
-  letter-spacing: 6px;
-  margin-bottom: 8px;
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 10px;
 }
 
 .hero-text p {
   color: var(--gold-color);
-  letter-spacing: 2px;
   font-size: 0.9rem;
+  letter-spacing: 2px;
 }
 
-/* ----- 3. معرض الصور السلايدر (Gallery) ----- */
+/* ----- Gallery Slider ----- */
 .gallery-container {
-  max-width: 850px;
+  max-width: 900px;
   margin: 0 auto;
-  position: relative;
 }
 
 .slider-wrapper {
   position: relative;
-  width: 100%;
   height: 450px;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(185, 152, 114, 0.2);
-  background-color: var(--card-bg);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .slide {
@@ -157,10 +210,10 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
   background-size: cover;
   background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
 }
 
 .slide.active {
@@ -171,38 +224,27 @@ header {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(14, 14, 14, 0.8);
+  background: rgba(13, 13, 13, 0.6);
   color: var(--gold-color);
-  border: 1px solid var(--gold-color);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  border: none;
+  font-size: 1.5rem;
+  padding: 12px 16px;
   cursor: pointer;
+  transition: background 0.3s ease;
   z-index: 10;
-  transition: all 0.3s ease;
-  direction: ltr !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .nav-btn:hover {
-  background: var(--gold-color);
+  background: rgba(185, 152, 114, 0.8);
   color: var(--bg-color);
 }
 
-.prev-btn { left: 15px; }
-.next-btn { right: 15px; }
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
 
-html[dir="rtl"] .prev-btn {
-  left: 15px;
-  right: auto;
-}
-
-html[dir="rtl"] .next-btn {
-  right: 15px;
-  left: auto;
-}
+/* Invert nav buttons position in RTL layout */
+html[dir="rtl"] .prev-btn { left: auto; right: 10px; }
+html[dir="rtl"] .next-btn { right: auto; left: 10px; }
 
 .dots-container {
   display: flex;
@@ -215,189 +257,112 @@ html[dir="rtl"] .next-btn {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #333;
+  background-color: rgba(255,255,255,0.3);
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .dot.active {
   background-color: var(--gold-color);
 }
 
-/* ----- 4. الصفحات الأخرى ----- */
-.page-section {
-  display: none;
-  padding: 20px 8% 50px;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.page-section.active-section {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.section-title {
+/* ----- About Us Section ----- */
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
   text-align: center;
-  margin-bottom: 30px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ccc;
 }
 
-.section-title h2 {
-  font-size: 1.8rem;
-  letter-spacing: 4px;
+/* ----- Contact Details Section ----- */
+.contact-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+  padding: 40px 30px;
+  background-color: var(--card-bg);
+  border: 1px solid rgba(185, 152, 114, 0.25);
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.contact-label {
+  color: var(--gold-color);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.contact-value {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  direction: ltr;
+  display: inline-block;
+}
+
+.contact-value:hover {
   color: var(--gold-color);
 }
 
-.gold-line {
-  display: block;
-  width: 50px;
-  height: 2px;
-  background-color: var(--gold-color);
-  margin: 10px auto 0;
+.email-link {
+  word-break: break-all;
 }
 
-.about-content {
-  max-width: 750px;
-  margin: 0 auto;
-  text-align: center;
-  line-height: 1.8;
-  color: var(--text-muted);
-}
-
-.contact-container {
-  max-width: 550px;
-  margin: 0 auto;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 12px;
-  background-color: var(--card-bg);
-  border: 1px solid rgba(185, 152, 114, 0.3);
-  color: #fff;
-  border-radius: 4px;
-  outline: none;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: var(--gold-color);
-}
-
-.submit-btn {
-  padding: 12px;
-  background-color: var(--gold-color);
-  color: var(--bg-color);
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  letter-spacing: 1px;
-}
-
+/* ----- Footer ----- */
 footer {
   text-align: center;
-  padding: 25px 0;
-  color: #555;
-  font-size: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  background-color: #080808;
+  color: #777;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: auto;
 }
 
-/* ========================================================= */
-/* ----- Responsive Styles for Mobile & Tablets (تجاوب الموبايل) ----- */
-/* ========================================================= */
-
+/* ----- Responsive Adjustments ----- */
 @media (max-width: 768px) {
-  /* Header & Navigation */
   header {
+    padding: 15px 20px;
     flex-direction: column;
-    padding: 12px 15px;
-    gap: 12px;
-  }
-
-  .logo-img {
-    height: 55px;
+    gap: 15px;
   }
 
   .navbar {
     width: 100%;
     justify-content: space-between;
-    gap: 15px;
   }
 
-  .navbar ul {
-    gap: 15px;
-  }
-
-  .navbar a {
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-  }
-
-  .lang-btn {
-    padding: 4px 12px;
-    font-size: 0.8rem;
-  }
-
-  /* Video & Texts */
-  .video-hero-container {
-    padding: 15px 10px 5px;
+  .slider-wrapper {
+    height: 300px;
   }
 
   .hero-text h1 {
     font-size: 1.3rem;
-    letter-spacing: 3px;
   }
 
-  .hero-text p {
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-  }
-
-  /* Slider */
-  .slider-wrapper {
-    height: 280px;
-  }
-
-  .nav-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 0.8rem;
-  }
-
-  .prev-btn { left: 8px; }
-  .next-btn { right: 8px; }
-
-  html[dir="rtl"] .prev-btn {
-    left: 8px;
-    right: auto;
-  }
-
-  html[dir="rtl"] .next-btn {
-    right: 8px;
-    left: auto;
-  }
-
-  /* Sections & Forms */
-  .page-section {
-    padding: 20px 5% 40px;
-  }
-
-  .section-title h2 {
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-  }
-
-  .about-content {
-    font-size: 0.9rem;
-    padding: 0 10px;
+  .contact-details {
+    padding: 30px 20px;
   }
 }
