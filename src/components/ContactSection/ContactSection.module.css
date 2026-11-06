@@ -1,0 +1,58 @@
+.contactContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+  padding: 40px 30px;
+  background-color: var(--card-bg);
+  border: 1px solid rgba(185, 152, 114, 0.25);
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.contactItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.contactLabel {
+  color: var(--gold-color);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.contactValue {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  direction: ltr;
+  display: inline-block;
+}
+
+.contactValue:hover {
+  color: var(--gold-color);
+}
+
+.emailLink {
+  word-break: break-all;
+}
+
+@media (max-width: 768px) {
+  .contactDetails {
+    padding: 30px 20px;
+  }
+}

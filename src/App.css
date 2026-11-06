@@ -1,0 +1,67 @@
+/* ----- Global Variables & Reset ----- */
+:root {
+  --bg-color: #0d0d0d;
+  --card-bg: #141414;
+  --text-color: #e6e6e6;
+  --gold-color: #b99872;
+  --gold-hover: #d4b28c;
+  --font-family: 'Montserrat', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-section {
+  display: none;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.page-section.active-section {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title h2 {
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: 2px;
+  font-size: 1.8rem;
+}
+
+.gold-line {
+  display: block;
+  width: 60px;
+  height: 2px;
+  background-color: var(--gold-color);
+  margin: 10px auto 0;
+}

@@ -1,0 +1,62 @@
+.heroContainerWrapper {
+  width: 100%;
+}
+
+.videoHeroContainer {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 30px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(185, 152, 114, 0.3);
+}
+
+.videoFrame {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  background-color: #000;
+}
+
+.heroVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hide native media controls */
+.heroVideo::-webkit-media-controls,
+.heroVideo::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+.heroText {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.heroText h1 {
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.heroText p {
+  color: var(--gold-color);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .heroText h1 {
+    font-size: 1.3rem;
+  }
+}
