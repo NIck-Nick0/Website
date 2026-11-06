@@ -10,7 +10,12 @@
   transition: all 0.3s ease;
 }
 
-/* عندما نكون في الصفحة الرئيسية (Home): يتحول لـ Fixed وفوق الصورة */
+.brandContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .fixedHeader {
   position: fixed;
   top: 0;
@@ -19,7 +24,6 @@
   backdrop-filter: blur(10px);
 }
 
-/* في باقي الصفحات (About / Contact): يكون عادي وثابت في مكانه */
 .staticHeader {
   position: relative;
   background-color: rgba(13, 13, 13, 0.98);
@@ -37,16 +41,12 @@
   object-fit: contain;
 }
 
-.navbar {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-.navbar ul {
+.navbarLinks ul {
   display: flex;
   list-style: none;
   gap: 35px;
+  margin: 0;
+  padding: 0;
 }
 
 .navLink {
