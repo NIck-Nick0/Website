@@ -82,6 +82,15 @@
   color: var(--bg-color);
 }
 
+/* إظهار زر اللغة في الديسكتوب وإخفاؤه من قائمة الموبايل افتراضياً */
+.mobileLangItem {
+  display: none;
+}
+
+.desktopLang {
+  display: block;
+}
+
 /* تصميم زر الثلاث شرط للموبايل (مخفي على الشاشات الكبيرة) */
 .menuIcon {
   display: none;
@@ -112,6 +121,17 @@
 
   .menuIcon {
     display: flex;
+  }
+
+  /* إخفاء زر اللغة الأساسي الموجود بجانب اللوجو على الموبايل */
+  .desktopLang {
+    display: none;
+  }
+
+  /* إظهار زر اللغة داخل القائمة المنسدلة الجانبية */
+  .mobileLangItem {
+    display: block;
+    margin-top: 10px;
   }
 
   /* الوضع الافتراضي (اللغة الإنجليزية LTR -> تطلع من الشمال) */
