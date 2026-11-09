@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Navbar.module.css';
 
 export default function Navbar({ activeSection, setActiveSection, lang, setLang }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   const toggleLanguage = () => {
     const newLang = lang === 'en' ? 'ar' : 'en';
     setLang(newLang);
@@ -23,25 +25,49 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
     }
   };
 
+  const handleNavClick = (section) => {
+    setActiveSection(section);
+    setIsOpen(false); // قفل القائمة تلقائياً عند اختيار قسم على الموبايل
+  };
+
   const headerStyle = activeSection === 'home' ? styles.fixedHeader : styles.staticHeader;
 
   return (
     <header className={`${styles.header} ${headerStyle}`}>
+      {/* زر التلات شرط للموبايل (Hamburger Menu Icon) */}
+      <div className={styles.menuIcon} onClick={() => setIsOpen(!isOpen)}>
+        <span className={`${styles.bar} ${isOpen ? styles.open : ''}`}></span>
+        <span className={`${styles.bar} ${isOpen ? styles.open : ''}`}></span>
+        <span className={`${styles.bar} ${isOpen ? styles.open : ''}`}></span>
+      </div>
+
       {/* الروابط في الجهة الأولى */}
-      <nav className={styles.navbarLinks}>
+      <nav className={`${styles.navbarLinks} ${isOpen ? styles.active : ''}`}>
         <ul>
           <li>
-            <a href="#home" className={`${styles.navLink} ${activeSection === 'home' ? styles.active : ''}`} onClick={(e) => { e.preventDefault(); setActiveSection('home'); }}>
+            <a 
+              href="#home" 
+              className={`${styles.navLink} ${activeSection === 'home' ? styles.active : ''}`} 
+              onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
+            >
               {lang === 'en' ? 'Home' : 'الرئيسية'}
             </a>
           </li>
           <li>
-            <a href="#about" className={`${styles.navLink} ${activeSection === 'about' ? styles.active : ''}`} onClick={(e) => { e.preventDefault(); setActiveSection('about'); }}>
+            <a 
+              href="#about" 
+              className={`${styles.navLink} ${activeSection === 'about' ? styles.active : ''}`} 
+              onClick={(e) => { e.preventDefault(); handleNavClick('about'); }}
+            >
               {lang === 'en' ? 'About Us' : 'من نحن'}
             </a>
           </li>
           <li>
-            <a href="#contact" className={`${styles.navLink} ${activeSection === 'contact' ? styles.active : ''}`} onClick={(e) => { e.preventDefault(); setActiveSection('contact'); }}>
+            <a 
+              href="#contact" 
+              className={`${styles.navLink} ${activeSection === 'contact' ? styles.active : ''}`} 
+              onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
+            >
               {lang === 'en' ? 'Contact' : 'تواصل معنا'}
             </a>
           </li>
@@ -54,7 +80,7 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
           {lang === 'en' ? 'عربي' : 'English'}
         </button>
         <div className={styles.logoContainer}>
-          <a href="#home" onClick={(e) => { e.preventDefault(); setActiveSection('home'); }}>
+          <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>
             <img src="/img/logo.png" alt="ARROW Logo" className={styles.logoImg} />
           </a>
         </div>
