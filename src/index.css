@@ -1,9 +1,11 @@
-/* index.css */
+/* ----- Global Variables & Reset ----- */
 :root {
   --bg-color: #0d0d0d;
+  --card-bg: #141414;
   --text-color: #ffffff;
   --gold-color: #b99872;
-  --font-family: 'Cairo', sans-serif; /* أو الخط المستخدم لديك */
+  --gold-hover: #d4b28c;
+  --font-family: 'Montserrat', 'Cairo', sans-serif;
 }
 
 * {
@@ -12,25 +14,92 @@
   padding: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-family);
-  direction: ltr; /* بيتم تعديله ديناميكياً بـ HTML dir */
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* الـ root لازم ياخد الطول كله عشان الفوتر ينزل لتحت */
+#root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ----- Sections ----- */
 .page-section {
   padding: 80px 20px;
   width: 100%;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 #home.page-section {
   padding-top: 0;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ----- Section Titles & Accents ----- */
 .section-title {
-  color: var(--gold-color);
   text-align: center;
   margin-bottom: 40px;
-  font-size: 2.5rem;
+}
+
+.section-title h2 {
+  color: #ffffff;
+  font-weight: 400;
+  letter-spacing: 2px;
+  font-size: 1.8rem;
+}
+
+.gold-line {
+  display: block;
+  width: 60px;
+  height: 2px;
+  background-color: var(--gold-color);
+  margin: 10px auto 0;
+}
+
+/* ----- Arabic: الـ letter-spacing بيفصل حروف العربي عن بعض ----- */
+html[lang="ar"] * {
+  letter-spacing: normal !important;
+}
+
+/* ----- Accessibility: مؤشر واضح للـ keyboard focus ----- */
+:focus-visible {
+  outline: 2px solid var(--gold-color);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
