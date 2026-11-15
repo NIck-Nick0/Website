@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ed-arrow.com/</loc>
-    <lastmod>2026-11-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://ed-arrow.com/</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://ed-arrow.com/about</loc><lastmod>2026-11-15</lastmod></url>
+  <url><loc>https://ed-arrow.com/contact</loc><lastmod>2026-11-15</lastmod></url>
 </urlset>

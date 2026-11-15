@@ -67,7 +67,7 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
         <ul>
           <li>
             <a 
-              href="#home" 
+              href="/" 
               className={`${styles.navLink} ${activeSection === 'home' ? styles.active : ''}`} 
               onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
             >
@@ -76,7 +76,7 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
           </li>
           <li>
             <a 
-              href="#about" 
+              href="/about" 
               className={`${styles.navLink} ${activeSection === 'about' ? styles.active : ''}`} 
               onClick={(e) => { e.preventDefault(); handleNavClick('about'); }}
             >
@@ -85,7 +85,7 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
           </li>
           <li>
             <a 
-              href="#contact" 
+              href="/contact" 
               className={`${styles.navLink} ${activeSection === 'contact' ? styles.active : ''}`} 
               onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}
             >
@@ -110,7 +110,7 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
           </button>
         </div>
         <div className={styles.logoContainer}>
-          <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>
+          <a href="/" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>
             <img src="/img/logo.png" alt="ARROW Logo" className={styles.logoImg} />
           </a>
         </div>

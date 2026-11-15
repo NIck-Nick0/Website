@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import ShowcaseGrid from './components/ShowcaseGrid/ShowcaseGrid';
 import HeroVideo from './components/HeroVideo/HeroVideo';
@@ -6,61 +7,56 @@ import GallerySlider from './components/GallerySlider/GallerySlider';
 import AboutSection from './components/AboutSection/AboutSection';
 import ContactSection from './components/ContactSection/ContactSection';
 import Footer from './components/Footer/Footer';
-// أقسام الصفحة الرئيسية الجديدة
+// أقسام الصفحة الرئيسية
 import SectionTitle from './components/SectionTitle/SectionTitle';
 import Services from './components/Services/Services';
 import OfferBanner from './components/OfferBanner/OfferBanner';
 import FeaturedProject from './components/FeaturedProject/FeaturedProject';
 import Process from './components/Process/Process';
 import CtaSection from './components/CtaSection/CtaSection';
+import { routes, SITE, sectionFromPath } from './seo.mjs';
+
+const PATHS = { home: routes.home.path, about: routes.about.path, contact: routes.contact.path };
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState('home');
   const [lang, setLang] = useState('en');
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // 1. مزامنة اللغة، الاتجاه (RTL/LTR)، والـ Meta Tags أوتوماتيكياً
+  const activeSection = sectionFromPath(location.pathname);
+
+  // 1. روابط قديمة زي ed-arrow.com/#about بتتحول لـ /about
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (hash && PATHS[hash]) {
+      navigate(PATHS[hash], { replace: true });
+    }
+  }, [location.hash, navigate]);
+
+  // 2. اللغة، الاتجاه، العنوان، الوصف، والـ canonical حسب الصفحة
   useEffect(() => {
     const dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.setAttribute('dir', dir);
     document.documentElement.setAttribute('lang', lang);
 
-    const titleElement = document.getElementById('meta-title');
+    const page = routes[activeSection][lang];
+    document.title = page.title;
+
     const descElement = document.getElementById('meta-desc');
+    if (descElement) descElement.setAttribute('content', page.desc);
 
-    if (titleElement && descElement) {
-      if (lang === 'en') {
-        titleElement.innerText = "Ed Arrow | Interior Design & Modern Furniture in Egypt";
-        descElement.setAttribute("content", "Ed Arrow specializes in interior design, modern kitchens manufacturing, and custom furniture with the highest quality in Egypt.");
-      } else {
-        titleElement.innerText = "Ed Arrow | تصميم داخلي وأثاث مودرن في مصر";
-        descElement.setAttribute("content", "Ed Arrow متفوقون في التصميم الداخلي، تنفيذ المطابخ المودرن، والأثاث المخصص بأعلى جودة في مصر. تواصل معنا لتنفيذ ديكور منزلك.");
-      }
-    }
-  }, [lang]);
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute('href', SITE + routes[activeSection].path);
+  }, [lang, activeSection]);
 
-  // 2. مزامنة الـ Hash وزر الـ Back في المتصفح والصعود للأعلى
+  // 3. الصعود لأعلى الصفحة عند تغيير الصفحة
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (hash && ['home', 'about', 'contact'].includes(hash)) {
-        setActiveSection(hash);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (!hash) {
-        setActiveSection('home');
-      }
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange(); // قراءة الهاش عند فتح الموقع أول مرة
-
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  // دالة التنقل الموحدة لتحديث الـ Hash والصعود لأعلى الصفحة
-  const handleNavClick = (section) => {
-    setActiveSection(section);
-    window.location.hash = section;
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
+
+  // دالة التنقل الموحدة (بتستخدمها الـ Navbar والأزرار)
+  const handleNavClick = (section) => {
+    navigate(PATHS[section] || '/');
   };
 
   return (
@@ -73,32 +69,35 @@ export default function App() {
       />
 
       <main>
-        {activeSection === 'home' && (
-          <section id="home" className="page-section active-section">
-            <ShowcaseGrid lang={lang} setActiveSection={handleNavClick} />
-            <HeroVideo lang={lang} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <section id="home" className="page-section active-section">
+                <ShowcaseGrid lang={lang} setActiveSection={handleNavClick} />
+                <HeroVideo lang={lang} />
 
-            <Services lang={lang} />
+                <Services lang={lang} />
 
-            <section style={{ marginBottom: 90 }}>
-              <SectionTitle title={lang === 'en' ? 'Our Kitchens' : 'مطابخنا'} />
-              <GallerySlider lang={lang} />
-            </section>
+                <section style={{ marginBottom: 90 }}>
+                  <SectionTitle title={lang === 'en' ? 'Our Kitchens' : 'مطابخنا'} />
+                  <GallerySlider lang={lang} />
+                </section>
 
-            <OfferBanner lang={lang} setActiveSection={handleNavClick} />
-            <FeaturedProject lang={lang} />
-            <Process lang={lang} />
-            <CtaSection lang={lang} setActiveSection={handleNavClick} />
-          </section>
-        )}
-
-        {activeSection === 'about' && (
-          <AboutSection lang={lang} />
-        )}
-
-        {activeSection === 'contact' && (
-          <ContactSection lang={lang} />
-        )}
+                <OfferBanner lang={lang} setActiveSection={handleNavClick} />
+                <FeaturedProject lang={lang} />
+                <Process lang={lang} />
+                <CtaSection lang={lang} setActiveSection={handleNavClick} />
+              </section>
+            }
+          />
+          <Route
+            path="/about"
+            element={<AboutSection lang={lang} setActiveSection={handleNavClick} />}
+          />
+          <Route path="/contact" element={<ContactSection lang={lang} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       <Footer lang={lang} />
