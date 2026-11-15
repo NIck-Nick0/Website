@@ -6,6 +6,13 @@ import GallerySlider from './components/GallerySlider/GallerySlider';
 import AboutSection from './components/AboutSection/AboutSection';
 import ContactSection from './components/ContactSection/ContactSection';
 import Footer from './components/Footer/Footer';
+// أقسام الصفحة الرئيسية الجديدة
+import SectionTitle from './components/SectionTitle/SectionTitle';
+import Services from './components/Services/Services';
+import OfferBanner from './components/OfferBanner/OfferBanner';
+import FeaturedProject from './components/FeaturedProject/FeaturedProject';
+import Process from './components/Process/Process';
+import CtaSection from './components/CtaSection/CtaSection';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -58,11 +65,11 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <Navbar 
-        activeSection={activeSection} 
-        setActiveSection={handleNavClick} 
-        lang={lang} 
-        setLang={setLang} 
+      <Navbar
+        activeSection={activeSection}
+        setActiveSection={handleNavClick}
+        lang={lang}
+        setLang={setLang}
       />
 
       <main>
@@ -70,7 +77,18 @@ export default function App() {
           <section id="home" className="page-section active-section">
             <ShowcaseGrid lang={lang} setActiveSection={handleNavClick} />
             <HeroVideo lang={lang} />
-            <GallerySlider lang={lang} />
+
+            <Services lang={lang} />
+
+            <section style={{ marginBottom: 90 }}>
+              <SectionTitle title={lang === 'en' ? 'Our Kitchens' : 'مطابخنا'} />
+              <GallerySlider lang={lang} />
+            </section>
+
+            <OfferBanner lang={lang} setActiveSection={handleNavClick} />
+            <FeaturedProject lang={lang} />
+            <Process lang={lang} />
+            <CtaSection lang={lang} setActiveSection={handleNavClick} />
           </section>
         )}
 
