@@ -190,3 +190,17 @@
     transform: translateY(-8.5px) rotate(-45deg);
   }
 }
+
+
+:global(html[dir="rtl"]) .header {
+  flex-direction: row-reverse; /* بيعكس مكان اللوجو وزر القائمة للموبايل */
+}
+
+:global(html[dir="rtl"]) .brandContainer {
+  flex-direction: row-reverse;
+}
+
+/* لو حابب تضبط اتجاه النصوص جوه القائمة الجانبية للموبايل لتكون يمينية في العربي */
+:global(html[dir="rtl"]) .navbarLinks {
+  text-align: right;
+}

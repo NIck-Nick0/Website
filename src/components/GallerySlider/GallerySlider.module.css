@@ -31,18 +31,23 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(13, 13, 13, 0.6);
+  background: rgba(13, 13, 13, 0.7);
   color: var(--gold-color);
   border: none;
-  font-size: 1.5rem;
-  padding: 12px 16px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%; /* تحويل الزر إلى دائرة كاملة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: background 0.3s ease;
   z-index: 10;
 }
 
 .navBtn:hover {
-  background: rgba(185, 152, 114, 0.8);
+  background: rgba(185, 152, 114, 0.9);
   color: var(--bg-color);
 }
 
@@ -52,6 +57,12 @@
 /* RTL support for buttons */
 :global(html[dir="rtl"]) .prevBtn { left: auto; right: 10px; }
 :global(html[dir="rtl"]) .nextBtn { right: auto; left: 10px; }
+
+/* انعكاس اتجاه السهم تلقائياً في اللغة العربية */
+:global(html[dir="rtl"]) .arrowIcon {
+  display: inline-block;
+  transform: scaleX(-1);
+}
 
 .dotsContainer {
   display: flex;
@@ -65,6 +76,8 @@
   height: 10px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.3);
+  border: none; /* إلغاء حدود الزر الافتراضية بعد تحويله لـ button */
+  padding: 0;    /* إلغاء الـ padding الافتراضي */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

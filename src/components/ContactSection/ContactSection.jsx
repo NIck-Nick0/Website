@@ -15,8 +15,8 @@ export default function ContactSection({ lang }) {
             <span className={styles.contactLabel}>
               {lang === 'en' ? 'PHONE' : 'الهاتف'}
             </span>
-            <a href="tel:01557114086" className={styles.contactValue}>0155 711 4086</a>
-            <a href="tel:01557114038" className={styles.contactValue}>0155 711 4038</a>
+            <a href="tel:+201557114086" className={styles.contactValue}>+20 155 711 4086</a>
+            <a href="tel:+201557114038" className={styles.contactValue}>+20 155 711 4038</a>
           </div>
 
           <div className={styles.contactItem}>
