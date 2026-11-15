@@ -41,10 +41,12 @@
     <!-- Fonts: Montserrat للإنجليزي، Cairo للعربي (Montserrat مفيهوش حروف عربي فبيكمل بـ Cairo تلقائي) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" /></noscript>
 
     <!-- تحميل مبكر لصورة الهيرو -->
-    <link rel="preload" as="image" href="/img/photo1.jpg" />
+    <link rel="preload" as="image" href="/img/hero-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" imagesrcset="/img/hero-1280.webp 1280w, /img/hero-1920.webp 1920w" imagesizes="100vw" type="image/webp" media="(min-width: 769px)" fetchpriority="high" />
   </head>
   <body>
     <div id="root"></div>

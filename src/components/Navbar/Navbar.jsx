@@ -32,7 +32,7 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
     setIsOpen(false);
   };
 
-  // إغلاق القائمة عند الضغط خارجها
+  // إغلاق القائمة عند الضغط خارجها أو بزرار Escape
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (navRef.current && !navRef.current.contains(event.target)) {
@@ -40,14 +40,20 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
       }
     };
 
+    const handleKey = (event) => {
+      if (event.key === 'Escape') setIsOpen(false);
+    };
+
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('touchstart', handleClickOutside);
+      document.addEventListener('keydown', handleKey);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleKey);
     };
   }, [isOpen]);
 
@@ -56,14 +62,23 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
   return (
     <header className={`${styles.header} ${headerStyle}`} ref={navRef}>
       {/* زر الثلاث شرط للموبايل */}
-      <div className={styles.menuIcon} onClick={() => setIsOpen(!isOpen)}>
+      <button
+        type="button"
+        className={styles.menuIcon}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen
+          ? (lang === 'en' ? 'Close menu' : 'إغلاق القائمة')
+          : (lang === 'en' ? 'Open menu' : 'فتح القائمة')}
+        aria-expanded={isOpen}
+        aria-controls="main-nav"
+      >
         <span className={`${styles.bar} ${isOpen ? styles.open : ''}`}></span>
         <span className={`${styles.bar} ${isOpen ? styles.open : ''}`}></span>
         <span className={`${styles.bar} ${isOpen ? styles.open : ''}`}></span>
-      </div>
+      </button>
 
       {/* روابط التنقل وقائمة الموبايل الجانبية */}
-      <nav className={`${styles.navbarLinks} ${isOpen ? styles.active : ''}`}>
+      <nav id="main-nav" className={`${styles.navbarLinks} ${isOpen ? styles.active : ''}`}>
         <ul>
           <li>
             <a 
@@ -111,7 +126,7 @@ export default function Navbar({ activeSection, setActiveSection, lang, setLang 
         </div>
         <div className={styles.logoContainer}>
           <a href="/" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>
-            <img src="/img/logo.png" alt="ARROW Logo" className={styles.logoImg} />
+            <img src="/img/logo.png" alt="ARROW Logo" className={styles.logoImg} width="330" height="220" />
           </a>
         </div>
       </div>

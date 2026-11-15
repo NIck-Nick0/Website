@@ -14,6 +14,7 @@ import OfferBanner from './components/OfferBanner/OfferBanner';
 import FeaturedProject from './components/FeaturedProject/FeaturedProject';
 import Process from './components/Process/Process';
 import CtaSection from './components/CtaSection/CtaSection';
+import WhatsAppFloat from './components/WhatsAppFloat/WhatsAppFloat';
 import { routes, SITE, sectionFromPath } from './seo.mjs';
 
 const PATHS = { home: routes.home.path, about: routes.about.path, contact: routes.contact.path };
@@ -79,7 +80,7 @@ export default function App() {
 
                 <Services lang={lang} />
 
-                <section style={{ marginBottom: 90 }}>
+                <section id="work" style={{ marginBottom: 90, scrollMarginTop: 100 }}>
                   <SectionTitle title={lang === 'en' ? 'Our Kitchens' : 'مطابخنا'} />
                   <GallerySlider lang={lang} />
                 </section>
@@ -101,6 +102,9 @@ export default function App() {
       </main>
 
       <Footer lang={lang} />
+
+      {/* زرار واتساب عايم (مخفي في صفحة التواصل لأن فيها واتساب أصلاً) */}
+      {activeSection !== 'contact' && <WhatsAppFloat lang={lang} />}
     </div>
   );
 }

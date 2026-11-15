@@ -4,6 +4,21 @@ import styles from './ShowcaseGrid.module.css';
 export default function ShowcaseGrid({ lang, setActiveSection }) {
   return (
     <section className={styles.heroSection}>
+      {/* صورة الهيرو: نسخة طولية للموبايل ونسختين للديسكتوب (WebP خفيفة) */}
+      <picture>
+        <source media="(max-width: 768px)" srcSet="/img/hero-mobile.webp" type="image/webp" />
+        <source
+          srcSet="/img/hero-1280.webp 1280w, /img/hero-1920.webp 1920w"
+          sizes="100vw"
+          type="image/webp"
+        />
+        <img
+          className={styles.bg}
+          src="/img/photo1.jpg"
+          alt=""
+          decoding="async"
+        />
+      </picture>
       <div className={styles.overlay}></div>
       <div className={styles.content}>
         
@@ -36,7 +51,13 @@ export default function ShowcaseGrid({ lang, setActiveSection }) {
           <button 
             className={styles.workBtn}
             onClick={() => {
-              window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+              // بينزل لقسم الأعمال (id="work" في App.jsx)، ولو مش موجود بينزل شاشة واحدة
+              const target = document.getElementById('work');
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              } else {
+                window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+              }
             }}
           >
             {lang === 'en' ? 'View our Work' : 'شاهد أعمالنا'}
